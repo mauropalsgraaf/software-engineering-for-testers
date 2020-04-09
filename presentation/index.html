@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/reveal.css" />
-    <link rel="stylesheet" href="css/theme/black.css" />
+    <link rel="stylesheet" href="css/theme/solarized.css" />
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/monokai.css" />
@@ -31,7 +31,7 @@
     <div class="reveal">
       <div class="slides">
         <section>Slide 1</section>
-        <section>Slide 2</section>
+        <section data-external="modules/module_0.html"></section>
       </div>
     </div>
 
@@ -47,7 +47,8 @@
           { src: "plugin/markdown/marked.js" },
           { src: "plugin/markdown/markdown.js" },
           { src: "plugin/highlight/highlight.js" },
-          { src: "plugin/notes/notes.js", async: true }
+          { src: "plugin/notes/notes.js", async: true },
+          { src: "plugin/external/external.js" }
         ]
       });
     </script>

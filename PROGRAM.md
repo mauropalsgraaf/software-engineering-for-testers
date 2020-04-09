@@ -101,6 +101,9 @@ Mainly stick to imperative examples here.
 
 #### 2.3 Inheritance (30m)
 
+- Abstract
+- Factory pattern.
+
 #### 2.4 Interfaces (30m)
 
 - "All problems in computer science can be solved by another level of indirection" - David Wheeler (https://en.wikipedia.org/wiki/Indirection) (held).
@@ -110,6 +113,7 @@ Mainly stick to imperative examples here.
 
 ### Module 3. SOLID (~2h)
 
+> Meenemen
 > `O` and `I` intentionally left out
 
 #### 3.1 Single Responsibility Principle (1h)
@@ -162,19 +166,27 @@ Mainly stick to imperative examples here.
 
 ---
 
-### Module 5. Building Test Data for (creational pattern/factory)
+### Module 5. Software Architecture
+
+TODO
+
+### Module 6. TDD
+
+TODO
+
+### Module 7. Building Test Data for (creational pattern/factory)
 
 TODO - Separate test data preparation from your tests
 
 ---
 
-### Module 6. Using abstractions to Reuse tests.
+### Module 8. Using abstractions to Reuse tests.
 
 TODO - Idea reuse same Cucumber test to do a visual test and a REST-based test.
 
 ---
 
-### Module 7. Page Object Pattern
+### Module 9. Page Object Pattern
 
 TODO - How OO can help you here
 

@@ -58,18 +58,22 @@ Tested code and clean code intersect:
 
 ### Module 1 - General Software Development (~2h).
 
-#### 1.1 Attitude (15m)
+Mainly stick to imperative examples here.
+
+#### 1.1 Attitude (10m - 15m)
 
 - Group effort.
 - _"Where Is the Science in Computer Science?"_
+  - Creating software is non-reproduce-able process. Therefor, everything is always arguable. Just keep using your head.
 - Be strict on the little things. It is a good and easy start
   - For example code formatting.
-- Boy scout.
+- Boy scout rule.
 
 #### 1.2 Readable/good names (45m).
 
 - Theory
 - Example by code. Include how it helps in testing.
+- Example of naming convention (controller, service, Repository/Dao, Client)
 - Hands-on by rewriting a 'cryptic' Java class - make the unit tests run again.
 
 #### 1.3 DRY (45m).
@@ -85,6 +89,7 @@ Tested code and clean code intersect:
 
 #### 2.1 Brief intro into Object Oriented programming (45m - 1h)
 
+- Differences with imperative
 - Classes, Methods, Fields;
 - Public, private, protected;
 

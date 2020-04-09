@@ -14,7 +14,7 @@
 
 ## General cut-up
 
-Day 1: Mainly on writing clean and testable code.
+Day 1: Mainly on writing clean and testable code.  
 Day 2: Mainly on Writing better test code.
 
 ## Sources and reading material for after the training:

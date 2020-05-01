@@ -1,7 +1,8 @@
 
 # Results from questionnaire
 
-## https://forms.gle/BA4syNDwR9JepU14A
+## [Link to questionnaire](https://forms.gle/BA4syNDwR9JepU14A)
+## [Link to answers](https://docs.google.com/spreadsheets/d/1CBL1PckexE_fWqamTWyCDQAsJdeDvntWCqVSKAf-l24/edit?usp=sharing)
 
 ### What do you want to know more about?
 - Testable code

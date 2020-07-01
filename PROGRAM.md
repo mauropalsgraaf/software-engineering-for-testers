@@ -19,8 +19,9 @@ Day 2: Mainly on Writing better test code.
 
 ## Sources and reading material for after the training:
 
-- Book Clean Code
+- Book: Clean Code
 - Book: Implementation Patterns
+- Book: Design Patterns
 - Web: https://sourcemaking.com/
 - Web: https://www.cs.helsinki.fi/u/luontola/tdd-2009/ext/ObjectCalisthenics.pdf
 - Paper: http://www.literateprogramming.com/mccabe.pdf
@@ -68,12 +69,13 @@ Mainly stick to imperative examples here.
 - Be strict on the little things. It is a good and easy start
   - For example code formatting.
 - Boy scout rule.
+  - Always leave the campsite cleaner then you how you found it.
 
 #### 1.2 Readable/good names (45m).
 
 - Theory
 - Example by code. Include how it helps in testing.
-- Example of naming convention (controller, service, Repository/Dao, Client)
+- Example of naming convention (controller, service, repository/dao, client)
 - Hands-on by rewriting a 'cryptic' Java class - make the unit tests run again.
 
 #### 1.3 DRY (45m).
@@ -113,9 +115,6 @@ Mainly stick to imperative examples here.
 
 ### Module 3. SOLID (~2h)
 
-> Meenemen
-> `O` and `I` intentionally left out
-
 #### 3.1 Single Responsibility Principle (1h)
 
 - Helps in the readability
@@ -124,21 +123,31 @@ Mainly stick to imperative examples here.
   - Tip: Use naming as referred to before.
 - Evaluate hands-on
 
-#### 3.2 Dependency Inversion (30m - 45m):
+#### 3.2 Open-closed principle (1h)
 
-- Show problems for testing code that is not using DI.
-- Rule of thumb: "Do not use `new`-keyword for classes that express business rules. `new`-keyword is 'ok' for data and domain objects."
-- For 95% only used to create testable code.
-- Hands-on: rewrite some code to be IoC compatible. Put all construction in the `main` function.
+- Hands-on: ?
 
 #### 3.3 Liskov Substitution Principle (30m without hands-on) (could be omitted if the time does not allow for it)
 
 - Show the dangers of making mistakes in this
 - Hands-on: ?
 
+#### 3.4 Interface segregation principle (1h)
+
+- 
+- Hands-on: one interface to rule them all. Segregate all 
+
+#### 3.5 Dependency Inversion (30m - 45m):
+
+- Show problems for testing code that is not using DI.
+- Rule of thumb: "Do not use `new`-keyword for classes that express business rules. `new`-keyword is 'ok' for data and domain objects."
+- For 95% only used to create testable code.
+- Hands-on: rewrite some code to be IoC compatible. Put all construction in the `main` function.
+
+
 ---
 
-### Module 4. Code Smells and Patterns and Others (~2)
+### Module 4. Code Smells and Patterns and Others (~2h)
 
 #### 4.1 Cyclomatic Complexity (45m)
 
@@ -166,29 +175,27 @@ Mainly stick to imperative examples here.
 
 ---
 
-### Module 5. Software Architecture
+### Module 5. Clean code
 
-TODO
-
-### Module 6. TDD
-
-TODO
-
-### Module 7. Building Test Data for (creational pattern/factory)
-
-TODO - Separate test data preparation from your tests
-
----
-
-### Module 8. Using abstractions to Reuse tests.
-
-TODO - Idea reuse same Cucumber test to do a visual test and a REST-based test.
-
----
+The book `Clean Code`, devided by chapter
+1. Meaningful names
+2. Functions
+3. Comments
+4. Formatting
+5. Object & data structures
+6. Error handling
+7. Boundaries
+8. Unit tests
+9. Classes
+10.  Possibly the following chapters: classes, systems, emergence and/or concurrency (when there's time left)
 
 ### Module 9. Page Object Pattern
 
 TODO - How OO can help you here
+
+### Module 10. Mocking
+
+TODO - Mocking for better tests
 
 ---
 

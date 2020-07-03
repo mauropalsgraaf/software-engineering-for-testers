@@ -1,0 +1,197 @@
+<section>
+    <h2>Module 2</h2>
+    <h3>Clean code</h3>
+</section>
+
+<section>
+    <h2>Topics</h2>
+    <ul>
+        <li>Meaningful names</li>
+        <li>Functions</li>
+        <li>Comments</li>
+        <li>Formatting</li>
+        <li>Objects & data structures</li>
+        <li>Error handling</li>
+        <li>Boundaries</li>
+        <li>Unit tests</li>
+        <li>Classes</li>
+    </ul>
+</section>
+
+<section>
+    <h3>Meaningsful names</h3>
+</section>
+
+<section>
+    <h3>Use meaningful, readable variable names</h3>
+
+    <pre><code data-trim data-noescape>
+        int d;
+        // elapsed time in days
+        int ds;
+        int dsm;
+        int faid;
+    </code></pre>
+</section>
+
+<section>
+    <h3>Use meaningful, readable variable names</h3>
+
+    <pre><code data-trim data-noescape>
+        int elapsedTimeInDays;
+        int daysSinceCreation;
+        int daysSinceModification;
+        int fileAgeInDays;
+    </code></pre>
+</section>
+
+<section>
+    <h4>Use Intention Revealing Names</h4>
+    <pre><code data-trim data-noescape>
+        public List<int[]> getThem() {
+            List<int[]> list1 = new ArrayList<int[]>();
+            for (int[] x : theList)
+                if (x[0] == 4)
+                    list1.add(x);
+            return list1;
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h4>Use Intention Revealing Names</h4>
+    <pre><code data-trim data-noescape>
+        public List<int[]> getFlaggedCells() {
+            List<int[]> flaggedCells = new ArrayList<int[]>();
+            for (int[] cell : gameBoard)
+                if (cell[STATUS_VALUE] == FLAGGED)
+                    flaggedCells.add(cell);
+            return flaggedCells;
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h4>Searchable Names</h4>
+    <pre><code data-trim data-noescape>
+        int d;
+        int e;
+        int x;
+        int z;
+    </code></pre>
+</section>
+
+<section>
+    <h4>Favor Readability over brevity</h4>
+    <br />
+    <p><b><em>CanScrollHorizontally</em></b> is better than <b><em>ScrollableX.</em></b></p>
+</section>
+
+<section>
+    <h4>One word per concept</h4>
+    <p>TODO add UML image where naming per concept is highlighted</p>
+</section>
+
+<section>
+    <h4>Don't be cute</h4>
+    <p>Funny names remain understandable only as long as you and the people who share the joke stay on the project.</p>
+</section>
+
+<section>
+    <h4>Classes</h4>
+    <p>
+        "Classes and objects should have noun or noun phrase names like Customer, WikiPage,
+        Account, and AddressParser. Avoid words like Manager, Processor, Data, or Info in the name
+        of a class. A class name should not be a verb."
+    </p>
+    <p>
+        Clean code - Uncle Bob
+    </p>
+</section>
+
+<section>
+    <h4>Methods</h4>
+    <p>
+        Methods should have verb (phrase) naming. Accessors, mutators and predicates should start with get, set or is.
+    </p>
+</section>
+
+<section>
+    <h4>Smart constructors</h4>
+    <p>
+        Use smart constructors when overloading the constructor.
+    </p>
+    <p>
+    <pre><code data-trim data-noescape>
+            Complex fulcrumPoint = Complex.FromRealNumber(23.0);
+            
+            Complex fulcrumPoint = new Complex(23.0);
+        </code></pre>
+    </p>
+</section>
+
+<section>
+    <h1>Functions</h1>
+
+    <ul>
+        <li>Small</li>
+        <li>Do one thing</li>
+        <li>Have explanatory names</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Not to many arguments</h2>
+
+    <p>
+        If your function has to many arguments, they most
+        like are connected and should be wrapped in an object
+    </p>
+</section>
+
+<section>
+    <h2>Command query Separation</h2>
+
+    <pre><code data-trim data-noescape>
+        public boolean set(String attribute, String value);
+    </code></pre>
+    
+    <pre><code data-trim data-noescape>
+        public boolean set(String attribute, String value);
+
+        if (set("username", "unclebob"))
+    </code></pre>
+    
+    <pre><code data-trim data-noescape>
+        if (attributeExists("username")) {
+            setAttribute("username", "unclebob");
+        }
+    </code></pre>
+    
+</section>
+
+<section>
+    <h1>Comments</h1>
+</section>
+
+<section>
+    <h2>Comments are last resort</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        // Check to see if the employee is eligible for full benefits
+        if ((employee.flags & HOURLY_FLAG) && (employee.age > 65))
+    </code></pre>
+    
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        if (employee.isEligibleForFullBenefits())
+    </code></pre>
+
+
+    <aside class="notes">
+        <ul>
+            <li>Comments do not make up for bad code, they often lie.</li>
+            <li>For that reason, prefer readable code instead of comments</li>
+        </ul>
+    </aside>
+    
+</section>

@@ -155,19 +155,19 @@
     <pre><code data-trim data-noescape>
         public boolean set(String attribute, String value);
     </code></pre>
-    
+
     <pre><code data-trim data-noescape>
         public boolean set(String attribute, String value);
 
         if (set("username", "unclebob"))
     </code></pre>
-    
+
     <pre><code data-trim data-noescape>
         if (attributeExists("username")) {
             setAttribute("username", "unclebob");
         }
     </code></pre>
-    
+
 </section>
 
 <section>
@@ -181,7 +181,7 @@
         // Check to see if the employee is eligible for full benefits
         if ((employee.flags & HOURLY_FLAG) && (employee.age > 65))
     </code></pre>
-    
+
     <pre class="fragment fade-in"><code data-trim data-noescape>
         if (employee.isEligibleForFullBenefits())
     </code></pre>
@@ -193,5 +193,310 @@
             <li>For that reason, prefer readable code instead of comments</li>
         </ul>
     </aside>
-    
+
 </section>
+
+<section>
+    <h2>Function / Variables > Comments</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        
+    // does the module from the global list <mod> depend on the
+    // subsystem we are part of?
+    if (smodule.getDependSubsystems().contains(subSysMod.getSubSystem()))
+    </code></pre>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>       
+        ArrayList moduleDependees = smodule.getDependSubsystems();
+        String ourSubSystem = subSysMod.getSubSystem();
+        if (moduleDependees.contains(ourSubSystem))
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>Another example where we can use proper naming and variables / functions to have the same readability as
+                the comment</li>
+        </ul>
+    </aside>
+
+</section>
+
+<section>
+    <h2>Comments will lie</h2>
+
+    <aside class="notes">
+        <ul>
+            <li>Comments will lie at a certain point of time because there is no correlation between the code and the
+                comment.</li>
+            <li>Whenever you refactor, there is no guarantee that you also change the comment which will result in lying
+                comments</li>
+        </ul>
+    </aside>
+
+</section>
+
+<section>
+    <h2>Redundant / Noisy comments</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        
+        /** The name. */
+        private String name;
+
+        /** The version. */
+        private String version;
+
+        /** The licenceName. */
+        private String licenceName;
+        
+        /** The info. */
+        private String info;
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>These comments do add nothing, only noise</li>
+        </ul>
+    </aside>
+
+</section>
+
+<section>
+    <h1>Objects and Data Structures</h1>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>The law of demeter</h2>
+
+    <aside class="notes">
+        // TODO
+    </aside>
+</section>
+
+<section>
+    <h2>Data Transfer Objects (DTO)</h2>
+
+    <aside class="notes">
+        // TODO
+    </aside>
+</section>
+
+<section>
+    <h2>Active records</h2>
+
+    <aside class="notes">
+        // TODO
+    </aside>
+</section>
+
+<section>
+    <h2>Use unchecked exceptions</h2>
+
+    <aside class="notes">
+        <ul>
+            <li>Checked exceptions break the open/closed principle.</li>
+            <li>If you have an exception that is thrown three layers lower, all the layers need to explicitly declare
+                the exception</li>
+            <li>Checked exceptions can be useful when writing a critical library because you MUST handle then</li>
+            <li>When doing application development, the cost outweigh the benefits</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Create context with exceptions</h2>
+
+    <aside class="notes">
+        <ul>
+            <li>The exception should provide enough context to determine the source and location of an error</li>
+            <li>It should explain the intent of why the operation failed</li>
+            <li>Add informative error messages with the exceptions. It allows you to improve logging and gives the
+                developer more info of why something failed.</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Create context with exceptions</h2>
+
+    <aside class="notes">
+        <ul>
+            <li>The exception should provide enough context to determine the source and location of an error</li>
+            <li>It should explain the intent of why the operation failed</li>
+            <li>Add informative error messages with the exceptions. It allows you to improve logging and gives the
+                developer more info of why something failed.</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Don't return null</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        public void registerItem(Item item) {
+            if (item != null) {
+                ItemRegistry registry = peristentStore.getItemRegistry();
+                if (registry != null) {
+                    Item existing = registry.getItem(item.getID());
+                    if (existing.getBillingPeriod().hasRetailOwner()) {
+                        existing.register(item); }
+                    }
+                }
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>Do you spot the mistake? What if getItem returns null? Because of all the null checks we declutter the
+                code</li>
+            <li>A missing null check can result in the application to halt (NullPointerException)</li>
+            <li>Prefer exceptions or Special Case object instead.</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2></h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        List<Employee> employees = getEmployees();
+        if (employees != null) {
+            for(Employee e : employees) {
+                totalPay += e.getPay();
+            }
+        }
+    </code></pre>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        // Get employees
+        public List<Employee> getEmployees() {
+            if (no employees) {
+                return Collections.emptyList();
+            }
+        }
+
+        List<Employee> employees = getEmployees();
+        for(Employee e : employees) {
+            totalPay += e.getPay();
+        }
+    </code></pre>
+
+    <aside class="notes">
+    </aside>
+</section>
+
+<section>
+    // TODO
+    <h2>Use optional as typesafe null alternative</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        public void registerItem(Item item) {
+            Optional<ItemRegistry> optionalRegistry = peristentStore.getItemRegistry();
+            optionalRegistry
+                .flatMap(registry -> registry.getItem(item.getID()))
+                .flatMap(existing -> {
+                    if (existing.getBillingPeriod().hasRetailOwner()) {
+                        return existing.register(item);
+                    }
+                });
+        }
+    </code></pre>
+
+    <aside class="notes">
+    </aside>
+</section>
+
+<section>
+    <h2>Don't pass null</h2>
+
+    <p>Just don't</p>
+
+    <aside class="notes">
+        <ul>
+            <li>If we allow nulls in function, it means that everywhere in our code the argument list needs to be checked by null</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h1>Unit tests</h1>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Three laws of test driven development</h2>
+
+    <ul>
+        <li>You may not write production code until you have written a failing unit test</li>
+        <li>You may not write more of a unit test than is sufficient to fail, and not compiling is failing</li>
+        <li>You may not write more production code than is sufficient to pass the currently failing test</li>
+    </ul>
+
+    <aside class="notes">
+        <p>
+            If we work this way, we will write dozens of tests every day, hundreds of tests every month, and thousands of tests every year. 
+            If we work this way, those tests will cover virtu- ally all of our production code. The sheer bulk of those tests, 
+            which can rival the size of the production code itself, can present a daunting management problem.
+        </p>
+    </aside>
+</section>
+
+<section>
+    <h2>Why do we write unit tests</h2>
+
+    <ul>
+        <li>Allows us to have more guarantee that our code works as we expect it to work.</li>
+        <li>Allows us to quickly make changes without fear.</li>
+    </ul>
+
+    <aside class="notes">
+        <p>
+            If we work this way, we will write dozens of tests every day, hundreds of tests every month, and thousands of tests every year. 
+            If we work this way, those tests will cover virtu- ally all of our production code. The sheer bulk of those tests, 
+            which can rival the size of the production code itself, can present a daunting management problem.
+        </p>
+    </aside>
+</section>
+
+<section>
+    <h2>What makes a clean test?</h2>
+    <h3>Readability</h3>
+
+    <ul>
+        <li class="fragment fade-in">Clarity</li>
+        <li class="fragment fade-in">Simplicity</li>
+        <li class="fragment fade-in">Density</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Clean test should follow F.I.R.S.T?</h2>
+
+    <ul>
+        <li class="fragment fade-in"><b>F</b>ast</li>
+        <li class="fragment fade-in"><b>I</b>ndependent</li>
+        <li class="fragment fade-in"><b>R</b>epeatable</li>
+        <li class="fragment fade-in"><b>S</b>elf-validation</li>
+        <li class="fragment fade-in"><b>T</b>imely</li>
+    </ul>
+
+    <aside class="notes">
+        <ul>
+            <li>Unit test should be fast. If they are slow, you don't want to run them frequently. Then you wont find problems early -> you don't feel as free to clean up the code</li>
+            <li>Test should be independent. When one test fail, it can cause cascading failures making diagnosis difficult and hiding downstream defects. Also, dependent tests cannot be paralized</li>
+            <li>Should be repeatable. Otherwise you always have an excuse not to run them. They should not require network.</li>
+            <li>Should be self-validating (either pass or fail). If not, for example when comparing two text output files, the success of a test is subjective</li>
+            <li>Timely, unit tests should be written before the production code. Otherwise you find that your tests may be hard to write. (this depends on experience though)</li>
+        </ul>
+    </aside>
+</section>
+
+<section></section>

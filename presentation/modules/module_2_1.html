@@ -1,0 +1,179 @@
+<section>
+    <h1>Module 2.1</h1>
+    <h2>Primitive obsessions</h2>
+
+    <aside class="notes">
+        <ul>
+            <li>Important: keep thinking. These are not strict rules, but rules of thumbs</li>
+            <li></li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Rule 1: One level of indentation per method</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        class Board {
+            String board() {
+                StringBuffer buf = new StringBuffer();
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 10; j++)
+                        buf.append(data[i][j]);
+                    buf.append(“\n”);
+                }
+                
+                return buf.toString();
+            }
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Rule 1: One level of indentation per method</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        class Board {
+            ...
+            String board() {
+                StringBuffer buf = new StringBuffer();
+                collectRows(buf);
+                return buf.toString();
+            }
+        }
+    </code></pre>
+    
+</section>
+
+<section>
+    <h2>Rule 1: One level of indentation per method</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        class Board {
+            public void collectRows(StringBuffer buf) {
+                for (int i = 0; i < 10; i++)
+                    collectRow(buf, i);
+            }
+            
+            public void collectRow(StringBuffer buf, int row) {
+                for (int i = 0; i < 10; i++)
+                    Buf.append(data[row][i]);
+                    buf.append(“\n”);
+                }
+            }
+        }
+    </code></pre>
+    
+</section>
+
+<section>
+    <h2>Rule 2: Don't use the ELSE keyword</h2>
+
+    <p class="fragment fade-in">
+        Else can produce an additional nesting level which makes your code harder to read.
+        Usually this can be solved by early returning.
+    </p>
+
+    <aside class="notes">
+        <ul>
+            <li>Else can reduce deep nesting levels, which makes it hard to follow</li>
+            <li>This can be solved by first getting rid of the "invalid" cases.</li>
+        </ul>
+    </aside>
+
+</section>
+
+<section>
+    <h2>Rule 2: Don't use the ELSE keyword</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        public int SomeFunction(bool cond1, string name, int value, AuthInfo perms) {
+            int retval = SUCCESS;
+            if (someCondition) {
+                if (name != null && name != "") {
+                    if (value != 0) {
+                        if (perms.allow(name) {
+                            // Do Something
+                        } else {
+                            reval = PERM_DENY;
+                        }
+                    } else {
+                        retval = BAD_VALUE;
+                    }
+                } else {
+                    retval = BAD_NAME;
+                }
+            } else {
+                retval = BAD_COND;
+            }
+            return retval;
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>Else can reduce deep nesting levels, which makes it hard to follow</li>
+            <li>This can be solved by first getting rid of the "invalid" cases.</li>
+        </ul>
+    </aside>
+
+</section>
+
+<section>
+    <h2>Rule 2: Don't use the ELSE keyword</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        public int SomeFunction(bool cond1, string name, int value, AuthInfo perms) {
+            if (!someCondition) return BAD_COND;
+            if (name == null || name == "") return BAD_NAME;
+            if (value == 0) return BAD_VALUE;
+            if (!perms.allow(name)) return PERM_DENY;
+
+            return SUCCESS;
+        }
+    </code></pre>
+
+</section>
+
+<section>
+    <h2>Rule 3: Wrap all primitives and Strings</h2>
+
+    <ul>
+        <li></li>
+    </ul>
+
+    <aside class="notes">
+        
+    </aside>
+
+</section>
+
+<section>
+    <h2>Rule 4: First class collections</h2>
+
+</section>
+
+<section>
+    <h2>Rule 5: One dot per line</h2>
+
+</section>
+
+<section>
+    <h2>Rule 6: Don't abbreviate</h2>
+
+</section>
+
+<section>
+    <h2>Rule 7: Keep all entities small</h2>
+
+</section>
+
+<section>
+    <h2>Rule 8: No classes with more than two instance variables</h2>
+
+</section>
+
+<section>
+    <h2>Rule 9: No getters/setters/properties</h2>
+
+</section>

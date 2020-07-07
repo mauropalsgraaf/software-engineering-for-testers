@@ -12,7 +12,7 @@
 
 <section>
     <h2>The principles</h2>
-    
+
     <ul>
         <li class="fragment fade-in"><b>S</b>ingle responsibility</li>
         <li class="fragment fade-in"><b>O</b>pen-closed</li>
@@ -28,9 +28,9 @@
 
 <section>
     <h2>Single responsibility principle</h2>
-    
+
     <p>
-        The single-responsibility principle (SRP) is a computer-programming principle 
+        The single-responsibility principle (SRP) is a computer-programming principle
         that states that every module or class should have responsibility over a single
         part of the functionality provided by the software, and that responsibility
         should be entirely encapsulated by the class, module or function.
@@ -38,5 +38,317 @@
 
     <aside class="notes">
 
+    </aside>
+</section>
+
+<section>
+    <h2>Open-closed principle</h2>
+
+    <p>
+        In object-oriented programming, the open/closed principle states "software entities (classes, modules,
+        functions, etc.)
+        should be open for extension, but closed for modification";
+        that is, such an entity can allow its behaviour to be extended without modifying its source code.
+    </p>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Open-closed principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        public interface CalculatorOperation {}
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Open-closed principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        public class Addition implements CalculatorOperation {
+            private double left;
+            private double right;
+            private double result = 0.0;
+        
+            public Addition(double left, double right) {
+                this.left = left;
+                this.right = right;
+            }
+        
+            // getters and setters
+        }        
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Open-closed principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        public class Subtraction implements CalculatorOperation {
+            private double left;
+            private double right;
+            private double result = 0.0;
+         
+            public Subtraction(double left, double right) {
+                this.left = left;
+                this.right = right;
+            }
+         
+            // getters and setters
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Liskov Substitution Principle</h2>
+
+    <p>
+        "in a computer program, if S is a subtype of T, then objects of type T may
+        be replaced with objects of type S (i.e., objects of type S may substitute
+        objects of type T) without altering any of the desirable
+        properties of that program (correctness, task performed, etc.)"
+    </p>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Liskov Substitution Principle</h2>
+
+    <img src="img/breaking-liskov.png" alt="Liskov duck typing">
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Liskov Substitution Principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        class Person
+        {
+            void walkNorth(int meters) {...}
+            void walkEast(int meters) {...}
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Liskov Substitution Principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        class Prisoner extends Person
+        {
+            void walkNorth(int meters) {...}
+            void walkEast(int meters) {...}
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>
+                Also obviously, this leads to trouble, since a prisoner is not free to move an arbitrary
+                distance in any direction, yet the contract of the Person class states that a Person can.
+
+                Thus, the class Person could better be named FreePerson.
+            </li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Interface segregation principle</h2>
+
+    <p>
+        In the field of software engineering, the interface-segregation principle (ISP) states
+        that no client should be forced to depend on methods it does not use.[1] ISP splits
+        interfaces that are very large into smaller and more specific ones so
+        that clients will only have to know about the methods that are of interest to them.
+    </p>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Interface segregation principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        interface OrderService {
+            void orderBurger(int quantity);
+            void orderFries(int fries);
+            void orderCombo(int quantity, int fries);
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Interface segregation principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape="">
+        class BurgerOrderService implements OrderService {
+            @Override
+            public void orderBurger(int quantity) {
+                System.out.println("Received order of "+quantity+" burgers");
+            }
+        
+            @Override
+            public void orderFries(int fries) {
+                throw new UnsupportedOperationException("No fries in burger only order");
+            }
+        
+            @Override
+            public void orderCombo(int quantity, int fries) {
+                throw new UnsupportedOperationException("No combo in burger only order");
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>The issue here is that the interface is too big, which results in that the BurgerOrderService cannot
+                implement all the methods.</li>
+            <li>Maintenance becomes harder because of side effects: a change in an interface forces us to change classes
+                that don’t implement the interface.</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Interface segregation principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape="">
+        interface BurgerOrderService {
+            void orderBurger(int quantity);
+        }
+        
+        interface FriesOrderService {
+            void orderFries(int fries);
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Dependency inversion principle</h2>
+
+    <p>
+        In object-oriented design, the dependency inversion principle is a specific form of decoupling software modules.
+        When following this principle, the conventional dependency relationships established from high-level,
+        policy-setting modules to low-level, dependency modules are reversed, thus rendering high-level modules
+        independent of the low-level module implementation details. The principle states:
+    </p>
+
+    <aside class="notes">
+        <ul>
+            <li>
+
+            </li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Dependency inversion principle</h2>
+
+    <ul>
+        <li class="fragment fade-in">High-level modules should not depend on low-level modules. Both should depend on abstractions (e.g. interfaces).</li>
+        <li class="fragment fade-in">Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.</li>
+    </ul>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Dependency inversion principle</h2>
+
+
+    <pre class="fragment fade-in"><code data-trim data-noescape="">
+        public class CoffeeMachine {
+            public void makeCoffee() {
+                System.out.println("Making coffee");
+            }
+        }
+    </code></pre>
+    <aside class="notes">
+        <ul>
+            <li>
+
+            </li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Dependency inversion principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape="">
+        public class CoffeeApp {
+            private CoffeeMachine coffeeMachine;
+            public CoffeeApp(CoffeeMachine coffeeMachine) {
+                this.coffeeMachine = coffeeMachine;
+            }
+
+            public void run() { ... }            
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li></li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Dependency inversion principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape="">
+        public class CoffeeApp {
+            private CoffeeMachine coffeeMachine;
+            public CoffeeApp(CoffeeMachine coffeeMachine) {
+                this.coffeeMachine = coffeeMachine;
+            }
+
+            public void run() { ... }            
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li></li>
+        </ul>
     </aside>
 </section>

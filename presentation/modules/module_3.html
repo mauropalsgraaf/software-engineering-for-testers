@@ -171,8 +171,6 @@
             <li>
                 Also obviously, this leads to trouble, since a prisoner is not free to move an arbitrary
                 distance in any direction, yet the contract of the Person class states that a Person can.
-
-                Thus, the class Person could better be named FreePerson.
             </li>
         </ul>
     </aside>
@@ -336,6 +334,40 @@
     <h2>Dependency inversion principle</h2>
 
     <pre class="fragment fade-in"><code data-trim data-noescape="">
+        public interface CoffeeMachine {
+            void makeCoffee();
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li></li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Dependency inversion principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape="">
+        public class FilterCoffeeMachine implements CoffeeMachine {
+            public void makeCoffee() {
+                System.out.println("Making delicious filter coffee");
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li></li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Dependency inversion principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape="">
         public class CoffeeApp {
             private CoffeeMachine coffeeMachine;
             public CoffeeApp(CoffeeMachine coffeeMachine) {
@@ -348,7 +380,9 @@
 
     <aside class="notes">
         <ul>
-            <li></li>
+            <li>This is actually super important for testing. Since we work against an abstraction now instead of a concrete interface.</li>
+            <li>We can now supply a dummy implementation. This technique is very important for handling side effects like database calls./</li>
+            <li>In production code we provide the class that does the actual call and in the tests we can provide a mock / dummy implementation.</li>
         </ul>
     </aside>
 </section>

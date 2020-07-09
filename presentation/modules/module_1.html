@@ -34,3 +34,93 @@
         </ul>
     </aside>
 </section>
+
+<section>
+    <h2>What is object-oriënted programming?</h2>
+
+    <p class="fragment fade-in">
+        Object-oriented programming (OOP) is a programming paradigm based on the concept of
+        "objects", which can contain data, in the form of fields (often known as attributes or properties), and code, in
+        the form of procedures (often known as methods).
+    </p>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Characteristics</h2>
+
+    <ul>
+        <li class="fragment fade-in">Encapsulation</li>
+        <li class="fragment fade-in">Inheritance</li>
+        <li class="fragment fade-in">Polymorphism</li>
+        <li class="fragment fade-in">Abstraction</li>
+    </ul>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Access modifiers</h2>
+
+    <ul>
+        <li>Public</li>
+        <li>Protected</li>
+        <li>Private</li>
+        <li>Package private (no keyword)</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Encapsulation</h2>
+
+    <p>
+        In object-oriented programming (OOP), encapsulation refers to the bundling of data with the methods that operate
+        on that data, or the restricting of direct access to some of an object's components. Encapsulation is used to
+        hide the values or state of a structured data object inside a class, preventing unauthorized parties' direct
+        access to them.
+    </p>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Encapsulation</h2>
+
+    <pre><code data-trim data-noescape>
+        class Account {
+            private int account_number;
+            private int account_balance;
+        
+            public void show Data() {
+                //code to show data 
+            }
+        
+            public void deposit(int a) {
+                if (a < 0) {
+                    //show error 
+                } else
+                    account_balance = account_balance + a;
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Encapsulation</h2>
+
+    <ul>
+        <li class="fragment fade-in">The fields of a class can be made read-only or write-only.</li>
+        <li class="fragment fade-in">A class can have total control over what is stored in its fields.</li>
+    </ul>
+</section>

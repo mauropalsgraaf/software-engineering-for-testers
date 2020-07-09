@@ -22,9 +22,15 @@
   - What defines a good architecture?
 - SOLID principles
 - Most common pitfalls
-- How do you keep code manageable?
-- Unit testing
+
+--------------------
+- Unit testing 
+--------------------
+
+--------------------
 - Which principles do you need for a new project?
+- How do you keep code manageable?
+--------------------
 
 ### What do you expect?
 - Examples of SOLID
@@ -42,9 +48,3 @@ Most (8) have 3-5 years of experience testing/writing some code
 One with 6 years
 
 Two with 10+ years of experience
-
-
-
-
-  
-

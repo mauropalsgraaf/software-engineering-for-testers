@@ -2,3 +2,232 @@
     <h2>Module 4</h2>
     <h3>Software patterns</h3>
 </section>
+
+<section>
+    <h2>Software patterns</h2>
+
+    <ul>
+        <li class="fragment fade-in">Adapter</li>
+        <li class="fragment fade-in">Factory</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Adapter Pattern</h2>
+
+    <p>
+        "Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate." -
+        https://refactoring.guru/design-patterns/adapter
+    </p>
+
+    <aside class="notes">
+        <ul>
+            <li></li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Adapter pattern</h2>
+
+    <img src="img/adapter.png" alt="UML diagram adapter pattern">
+</section>
+
+<section>
+    <h2>Adapter pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public interface Fighter {
+            void attack();
+            void defend();
+            void escape();
+        }        
+    </code></pre>
+</section>
+
+<section>
+    <h2>Adapter pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public class Wizard {
+            public void castDestructionSpell() {
+                System.out.println("destruction spell");
+            }
+            public void shield() {
+                System.out.println("shield");
+            }
+            public void portal() {
+                System.out.println("portal");
+            }
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Adapter pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public class WizardAdapter implements Fighter {
+            private final Wizard wizard;
+            
+            public WizardAdapter(Wizard wizard) {
+                this.wizard = wizard;
+            }
+            public void attack() { wizard.castDestructionSpell(); }
+            public void defend() { wizard.shield(); }
+            public void escape() { wizard.portal(); }
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Adapter pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public void doSomething(Fighter fighter) { ... }
+    </code></pre>
+
+    <pre><code data-trim data-noescape>
+        Wizard wizard = new Wizard();
+        doSomething(new WizardAdapter(wizard));
+    </code></pre>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <p class="fragment fade-in">
+        "Factory Method is a creational design pattern that provides an interface for creating objects in a superclass,
+        but allows subclasses to alter the type of objects that will be created." -
+        "https://refactoring.guru/design-patterns/factory-method"
+    </p>
+
+    <aside class="notes">
+        <ul>
+            <li></li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public interface Button {
+            void render();
+            void onClick();
+        }
+    </code></pre>
+
+    <aside class="notes">
+        
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public class WebButton implements Button {
+            public void render() {
+                System.out.println("I'm a web button");
+            }
+            public void onClick() {
+                System.out.println("You just clicked a web button");
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public class WindowsButton implements Button {
+            public void render() {
+                System.out.println("I'm a windows button");
+            }
+            public void onClick() {
+                System.out.println("You just clicked a windows button");
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public abstract class Dialog {
+            abstract Button createButton();
+        
+            void renderDialog() {
+                System.out.println("Rendering dialog");
+                System.out.println("Rendering button: ");
+                createButton().render();
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public class WindowsDialog extends Dialog {
+            Button createButton() {
+                return new WindowsButton();
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+        
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+    
+    <pre><code data-trim data-noescape>
+        public class WebDialog extends Dialog {
+            Button createButton() {
+                return new WebButton();
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+    
+    <pre><code data-trim data-noescape>
+        public static void main(String[] args) {
+            Dialog dialog = new WebDialog();
+    
+            dialog.renderDialog();
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li></li>
+        </ul>
+    </aside>
+</section>

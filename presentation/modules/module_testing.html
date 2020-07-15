@@ -1,0 +1,324 @@
+<section>
+    <h2>Module 2</h2>
+    <h3>Testing from a developers POV</h3>
+</section>
+
+<section>
+    <h2>The testing pyramid</h2>
+
+    <img src="img/testingpyramid.png" alt="Testing pyramid" width="400">
+
+    <aside class="notes">
+        <ul>
+            <li>It also gives an idea of how many tests we should have in each of these groups.</li>
+            <li>Write tests with different granularity</li>
+            <li>The more high-level you get the fewer tests you should have</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Unit testing</h2>
+
+    <p>Unit testing is a level of software testing where individual units/ components of a software are tested.</p>
+
+    <aside class="notes">
+        <ul>
+            <li>The foundation of our test suite will be unit tests</li>
+            <li>What is a unit? FP -> Function, OO -> Can be a class, can be a function</li>
+            <li>Unit tests should ensure that all your happy, but also non trivial code paths are covered</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Benefits of unit tests</h2>
+
+    <ul>
+        <li>Increases confidence in changing / maintaining code</li>
+        <li>Code is more reusable</li>
+        <li>Code is more reliable</li>
+        <li>Increases development speed</li>
+    </ul>
+
+    <aside class="notes">
+        <ul>
+            <li>
+                In order to make unit testing possible, codes need to be modular. This means that codes are easier to
+                reuse.
+            </li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Clean test should follow F.I.R.S.T?</h2>
+
+    <ul>
+        <li class="fragment fade-in"><b>F</b>ast</li>
+        <li class="fragment fade-in"><b>I</b>ndependent</li>
+        <li class="fragment fade-in"><b>R</b>epeatable</li>
+        <li class="fragment fade-in"><b>S</b>elf-validation</li>
+        <li class="fragment fade-in"><b>T</b>imely</li>
+    </ul>
+
+    <aside class="notes">
+        <ul>
+            <li>Unit test should be fast. If they are slow, you don't want to run them frequently. Then you wont find problems early -> you don't feel as free to clean up the code</li>
+            <li>Test should be independent. When one test fail, it can cause cascading failures making diagnosis difficult and hiding downstream defects. Also, dependent tests cannot be paralized</li>
+            <li>Should be repeatable. Otherwise you always have an excuse not to run them. They should not require network.</li>
+            <li>Should be self-validating (either pass or fail). If not, for example when comparing two text output files, the success of a test is subjective</li>
+            <li>Timely, unit tests should be written before the production code. Otherwise you find that your tests may be hard to write. (this depends on experience though)</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Arrange Act Assert (AAA) </h2>
+
+    <aside class="notes">
+        <ul>
+            <li>A unit test (but also different types of tests) should follow AAA</li>
+            <li>First you setup the "environment" as you would like it to be for a certain scenario</li>
+            <li>Second, you run the code you want to test</li>
+            <li>Lastly, you assert that everything that you want to happen happened (output, side effects)</li>
+        </ul>
+        
+    </aside>
+</section>
+
+<section>
+    <h2>Unit testing in Java</h2>
+
+    <pre><code data-trim data-noescape="">
+        public class Calculator {
+            public int sum(int left, int right) {
+                return left + right;
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Unit testing in Java</h2>
+
+    <pre><code data-trim data-noescape="">
+        public class CalculatorTest {
+            @Test
+            public void shouldSumTheInputs() {
+                Calculator calculator = new Calculator();
+
+                int result = calculator.sum(2, 3);
+                assertEquals(5, result);
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>The most basic example of a unit test are methods that do nothing more than input -> output</li>
+            <li>We call the function with arguments and we check for the expected result</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Unit testing in Java</h2>
+
+    <pre><code data-trim data-noescape="">
+        public class CalculatorTest {
+            private Calculator calculator;
+            
+            @BeforeEach
+            public void setUp() {
+                this.calculator = new Calculator();
+            }
+        
+            @Test
+            public void shouldSumTheInputs() {
+                int result = calculator.sum(2, 3);
+                assertEquals(5, result);
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>JUnit and other testing frameworks allow you to have common steps before / after each test</li>
+            <li>Common code that needs to be ran before / after each test can be put there</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Methods with side effects</h2>
+
+    <aside class="notes">
+        <ul>
+            <li>Most of the time, code contains side effects. E.g database or http calls</li>
+            <li>How do we handle them, because we said unit test should run environment independent</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>What is a mock?</h2>
+
+    <p>
+        Mocks are pre-programmed with expectations which form a specification of the calls they are expected to receive.
+        They can throw an exception if they receive a call they don't expect and are checked during verification to
+        ensure they got all the calls they were expecting.
+    </p>
+
+    <aside class="notes">
+        <ul>
+            <li>Mocks allow us to replace the dependency with a mock</li>
+            <li>The mock object has preprogrammed behaviour for certains and can check for the arguments it expects to receive</li>
+            <li>Afterwards, we can check if the calls actually happened.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h2>Mocking to the rescue: Mockito</h2>
+
+    <p>
+        "Mockito is a mocking framework for Java. Mockito allows convenient creation of substitutes of real objects for
+        testing purposes."
+    </p>
+
+    <p>https://github.com/mockito/mockito/wiki/FAQ</p>
+
+
+    <aside class="notes">
+        <ul>
+            <li>Mockito is a mocking library for Java</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Mocking</h2>
+
+    <img src="img/interfaces.png" alt="Mocking example" />
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Mocking</h2>
+
+    <img src="img/interfaces.png" alt="Mocking example" />
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Mocking</h2>
+
+    <pre><code data-trim data-noescape>
+        public class UnemploymentServiceImpl implements UnemploymentService {
+ 
+            private JobService jobService;
+            
+            public UnemploymentServiceImpl(JobService jobService) {
+                this.jobService = jobService;
+            }
+         
+            @Override
+            public boolean personIsEntitledToUnemploymentSupport(Person person) {
+                Optional&lt;JobPosition&gt; optional = jobService.findCurrentJobPosition(person);
+                
+                return !optional.isPresent();
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Mocking</h2>
+
+    <pre><code data-trim data-noescape>
+        public class UnemploymentServiceImplTest {
+ 
+            @Mock
+            private JobService jobService;
+         
+            @InjectMocks
+            private UnemploymentServiceImpl unemploymentService;
+         
+            @Test
+            public void givenReturnIsOfTypeOptional_whenMocked_thenValueIsEmpty() { ... }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Mocking</h2>
+
+    <pre><code data-trim data-noescape>
+        public class UnemploymentServiceImplTest {
+            private JobService jobService;
+            private UnemploymentServiceImpl unemploymentService;
+
+            @BeforeEach
+            public void setUp() {
+                this.jobService = Mockito.mock(JobService.class);
+                this.unemploymentService = new UnemploymentServiceImpl(this.jobService);
+            }
+         
+            @Test
+            public void givenReturnIsOfTypeOptional_whenMocked_thenValueIsEmpty() { ... }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Mocking</h2>
+
+    <pre><code data-line-numbers="1-13|8-8|9-9|10-10" data-trim data-noescape>
+        public class UnemploymentServiceImplTest {
+
+            @Test
+            public void givenReturnIsOfTypeOptional_whenMocked_thenValueIsEmpty() {
+
+                Person person = new Person();
+            
+                when(
+                    jobService.findCurrentJobPosition(any(Person.class))
+                ).thenReturn(Optional.empty());
+                
+                assertTrue(unemploymentService.personIsEntitledToUnemploymentSupport(person));
+            }
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Test-driven development</h2>
+
+    <p>
+        You may not write production code until you have written a failing unit test
+        You may not write more of a unit test than is sufficient to fail, and not compiling is failing
+        You may not write more production code than is sufficient to pass the currently failing test
+    </p>
+</section>

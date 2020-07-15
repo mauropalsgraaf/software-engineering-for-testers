@@ -144,6 +144,8 @@ For each of the patterns:
 
 ### Module 5. Measuring / improving code quality (~2h)
 
+---- PACO MAILEN
+
 #### 5.1 Cyclomatic Complexity
 
 - What is cyclomatic complexity and how can it be helpful

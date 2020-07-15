@@ -37,7 +37,91 @@
     </p>
 
     <aside class="notes">
+        <ul>
+            <li>
 
+            </li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Classical example</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        class Book {
+            public String getTitle() {
+                return "A Great Book";
+            }
+         
+            public String getAuthor() {
+                return "John Doe";
+            }
+         
+            public Page turnPage() {
+                // pointer to next page
+            }
+         
+            public void printCurrentPage() {
+                echo "current page content";
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>What is the problem with the current code</li>
+            <li>The class has multiple actors. One could be for example a librarian.</li>
+            <li>The second actor is the presentation layer. Where do we print to?</li>
+            <li>Do we print to UI, console, or what</li>
+            <li>In this example, we are mixing our domain code with the presentational layer</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Seperating the concerns</h2>
+
+    <pre><code data-trim>
+        interface Printer {
+            public void printPage(Page page);
+        }
+         
+        class PlainTextPrinter implements Printer {
+            public void printPage($page) {
+                echo $page;
+            }
+        }
+         
+        class HtmlPrinter implements Printer {
+            public void printPage(Page page) {
+                echo <div style="single-page">' . $page . '</div>';
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>This example also shows how it gives us design flexibility.</li>
+            <li>It also makes it very easy to add new printers.</li>
+            <li>The same counts for objects that can save themself</li>
+            <li>Put the responsibility of storing an object to a different class</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Structuring an application</h2>
+
+    <img src="img/structuring-application.png" alt="Structuring your domain" />
+
+    <aside class="notes">
+        <ul>
+            <li>Business logic and your domain in the middle</li>
+            <li>Persistence is seperated from your domain model</li>
+            <li>UI is seperated. This is nice, because now you can have multiple presentational layers.</li>
+            <li>You have your core domain which define all the rules.</li>
+        </ul>
     </aside>
 </section>
 
@@ -52,7 +136,12 @@
     </p>
 
     <aside class="notes">
-
+        <p>
+            In object-oriented programming, the open/closed principle states "software entities (classes, modules,
+            functions, etc.)
+            should be open for extension, but closed for modification";
+            that is, such an entity can allow its behaviour to be extended without modifying its source code.
+        </p>
     </aside>
 </section>
 
@@ -112,6 +201,81 @@
     <aside class="notes">
 
     </aside>
+</section>
+
+<section>
+    <h2>Open-closed principle</h2>
+
+    <pre><code data-trim data-noescape>
+        public class Calculator {
+ 
+            public void calculate(CalculatorOperation operation) {
+                if (operation instanceof Addition) {
+                    Addition addition = (Addition) operation;
+                    addition.setResult(addition.getLeft() + addition.getRight());
+                } else if (operation instanceof Subtraction) {
+                    Subtraction subtraction = (Subtraction) operation;
+                    subtraction.setResult(subtraction.getLeft() - subtraction.getRight());
+                }
+            }
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Open-closed principle</h2>
+
+    <pre><code data-trim data-noescape>
+        public interface CalculatorOperation {
+            int perform();
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Open-closed principle</h2>
+
+    <pre><code data-trim data-noescape>
+        public class Addition implements CalculatorOperation {
+            private double left;
+            private double right;
+
+            // constructor
+         
+            @Override
+            public int perform() {
+                return left + right;
+            }
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Open-closed principle</h2>
+
+    <pre><code data-trim data-noescape>
+        public class Multiplication implements CalculatorOperation {
+            private double left;
+            private double right;
+         
+            // constructor
+
+            @Override
+            public int perform() {
+                return left * right;
+            }
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Open-closed principle</h2>
+
+    <pre><code data-trim data-noescape>
+        public void calculate(CalculatorOperation operation) {
+            operation.perform();
+        }
+    </code></pre>
 </section>
 
 <section>
@@ -280,8 +444,10 @@
     <h2>Dependency inversion principle</h2>
 
     <ul>
-        <li class="fragment fade-in">High-level modules should not depend on low-level modules. Both should depend on abstractions (e.g. interfaces).</li>
-        <li class="fragment fade-in">Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.</li>
+        <li class="fragment fade-in">High-level modules should not depend on low-level modules. Both should depend on
+            abstractions (e.g. interfaces).</li>
+        <li class="fragment fade-in">Abstractions should not depend on details. Details (concrete implementations)
+            should depend on abstractions.</li>
     </ul>
 
     <aside class="notes">
@@ -380,9 +546,12 @@
 
     <aside class="notes">
         <ul>
-            <li>This is actually super important for testing. Since we work against an abstraction now instead of a concrete interface.</li>
-            <li>We can now supply a dummy implementation. This technique is very important for handling side effects like database calls./</li>
-            <li>In production code we provide the class that does the actual call and in the tests we can provide a mock / dummy implementation.</li>
+            <li>This is actually super important for testing. Since we work against an abstraction now instead of a
+                concrete interface.</li>
+            <li>We can now supply a dummy implementation. This technique is very important for handling side effects
+                like database calls./</li>
+            <li>In production code we provide the class that does the actual call and in the tests we can provide a mock
+                / dummy implementation.</li>
         </ul>
     </aside>
 </section>

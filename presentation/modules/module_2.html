@@ -48,8 +48,8 @@
 <section>
     <h4>Use Intention Revealing Names</h4>
     <pre><code data-trim data-noescape>
-        public List<int[]> getThem() {
-            List<int[]> list1 = new ArrayList<int[]>();
+        public List&lt;int[]&gt; getThem() {
+            List&lt;int[]&gt; list1 = new ArrayList&lt;int[]&gt;();
             for (int[] x : theList)
                 if (x[0] == 4)
                     list1.add(x);
@@ -61,8 +61,8 @@
 <section>
     <h4>Use Intention Revealing Names</h4>
     <pre><code data-trim data-noescape>
-        public List<int[]> getFlaggedCells() {
-            List<int[]> flaggedCells = new ArrayList<int[]>();
+        public List&lt;int[]&gt; getFlaggedCells() {
+            List&lt;int[]&gt; flaggedCells = new ArrayList&lt;int[]&gt;();
             for (int[] cell : gameBoard)
                 if (cell[STATUS_VALUE] == FLAGGED)
                     flaggedCells.add(cell);
@@ -261,21 +261,21 @@
 
 </section>
 
-<section>
+<!-- <section>
     <h1>Objects and Data Structures</h1>
 
     <aside class="notes">
 
     </aside>
-</section>
-
+</section> -->
+<!-- 
 <section>
     <h2>The law of demeter</h2>
 
     <aside class="notes">
         // TODO
     </aside>
-</section>
+</section> -->
 
 <section>
     <h2>Data Transfer Objects (DTO)</h2>
@@ -303,19 +303,6 @@
                 the exception</li>
             <li>Checked exceptions can be useful when writing a critical library because you MUST handle then</li>
             <li>When doing application development, the cost outweigh the benefits</li>
-        </ul>
-    </aside>
-</section>
-
-<section>
-    <h2>Create context with exceptions</h2>
-
-    <aside class="notes">
-        <ul>
-            <li>The exception should provide enough context to determine the source and location of an error</li>
-            <li>It should explain the intent of why the operation failed</li>
-            <li>Add informative error messages with the exceptions. It allows you to improve logging and gives the
-                developer more info of why something failed.</li>
         </ul>
     </aside>
 </section>
@@ -391,7 +378,6 @@
 </section>
 
 <section>
-    // TODO
     <h2>Use optional as typesafe null alternative</h2>
 
     <pre class="fragment fade-in"><code data-trim data-noescape>
@@ -414,8 +400,6 @@
 <section>
     <h2>Don't pass null</h2>
 
-    <p>Just don't</p>
-
     <aside class="notes">
         <ul>
             <li>If we allow nulls in function, it means that everywhere in our code the argument list needs to be checked by null</li>
@@ -424,79 +408,12 @@
 </section>
 
 <section>
-    <h1>Unit tests</h1>
-
-    <aside class="notes">
-
-    </aside>
-</section>
-
-<section>
-    <h2>Three laws of test driven development</h2>
+    <h2>Gilded Rose Refactoring kata</h2>
 
     <ul>
-        <li>You may not write production code until you have written a failing unit test</li>
-        <li>You may not write more of a unit test than is sufficient to fail, and not compiling is failing</li>
-        <li>You may not write more production code than is sufficient to pass the currently failing test</li>
-    </ul>
-
-    <aside class="notes">
-        <p>
-            If we work this way, we will write dozens of tests every day, hundreds of tests every month, and thousands of tests every year. 
-            If we work this way, those tests will cover virtu- ally all of our production code. The sheer bulk of those tests, 
-            which can rival the size of the production code itself, can present a daunting management problem.
-        </p>
-    </aside>
-</section>
-
-<section>
-    <h2>Why do we write unit tests</h2>
-
-    <ul>
-        <li>Allows us to have more guarantee that our code works as we expect it to work.</li>
-        <li>Allows us to quickly make changes without fear.</li>
-    </ul>
-
-    <aside class="notes">
-        <p>
-            If we work this way, we will write dozens of tests every day, hundreds of tests every month, and thousands of tests every year. 
-            If we work this way, those tests will cover virtu- ally all of our production code. The sheer bulk of those tests, 
-            which can rival the size of the production code itself, can present a daunting management problem.
-        </p>
-    </aside>
-</section>
-
-<section>
-    <h2>What makes a clean test?</h2>
-    <h3>Readability</h3>
-
-    <ul>
-        <li class="fragment fade-in">Clarity</li>
-        <li class="fragment fade-in">Simplicity</li>
-        <li class="fragment fade-in">Density</li>
+        <li class="fragment fade-in">Go to exercises/CleanCode</li>
+        <li class="fragment fade-in">Run mvn clean install to see if you get the project to run (1 test fail)</li>
+        <li class="fragment fade-in"> Write unit tests to ensure the application works as you would expect</li>
+        <li class="fragment fade-in">Start refactoring by applying the clean code rules (and more)</li>
     </ul>
 </section>
-
-<section>
-    <h2>Clean test should follow F.I.R.S.T?</h2>
-
-    <ul>
-        <li class="fragment fade-in"><b>F</b>ast</li>
-        <li class="fragment fade-in"><b>I</b>ndependent</li>
-        <li class="fragment fade-in"><b>R</b>epeatable</li>
-        <li class="fragment fade-in"><b>S</b>elf-validation</li>
-        <li class="fragment fade-in"><b>T</b>imely</li>
-    </ul>
-
-    <aside class="notes">
-        <ul>
-            <li>Unit test should be fast. If they are slow, you don't want to run them frequently. Then you wont find problems early -> you don't feel as free to clean up the code</li>
-            <li>Test should be independent. When one test fail, it can cause cascading failures making diagnosis difficult and hiding downstream defects. Also, dependent tests cannot be paralized</li>
-            <li>Should be repeatable. Otherwise you always have an excuse not to run them. They should not require network.</li>
-            <li>Should be self-validating (either pass or fail). If not, for example when comparing two text output files, the success of a test is subjective</li>
-            <li>Timely, unit tests should be written before the production code. Otherwise you find that your tests may be hard to write. (this depends on experience though)</li>
-        </ul>
-    </aside>
-</section>
-
-<section></section>

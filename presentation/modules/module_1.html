@@ -2,7 +2,6 @@
     <h2>Module 1</h2>
     <h3>Object Oriented Programming</h3>
 
-
     <!-- Speaker notes -->
     <aside class="notes">
         <ul>
@@ -65,6 +64,51 @@
 </section>
 
 <section>
+    <h2>Short intro in Java</h2>
+</section>
+
+<section>
+    <pre><code data-trim data-noescape>
+        public class Customer {
+            private String firstName;
+            private String lastName;
+
+            public String getFirstName() {
+                return this.firstName;
+            }
+
+            public String getLastName() {
+                return this.lastName;
+            }
+        }
+    </code></pre>
+
+</section>
+
+<section>
+    <pre><code data-trim data-noescape>
+        // if no constructor is provided in a class, it will have an empty constructor.
+        Customer customer = new Customer();
+    </code></pre>
+</section>
+
+<section>
+    <pre><code data-trim data-noescape>
+        public class Customer {
+            private String firstName;
+            private String lastName;
+
+            public Customer(String firstName, String lastName) {
+                this.firstName = firstName;
+                this.lastName = lastName;
+            }
+
+            // getters and setters
+        }
+    </code></pre>
+</section>
+
+<section>
     <h2>Access modifiers</h2>
 
     <ul>
@@ -86,7 +130,12 @@
     </p>
 
     <aside class="notes">
-
+        <ul>
+            <li>Encapsulation is very important! Without encapsulation the code will become spaghetti.</li>
+            <li>If a codebase grows, it is important to have small, individually understandable pieces that we can tie
+                up together to get a bigger application</li>
+            <li>If everything is always exposed, it means that an object can be changed everywhere in the code.</li>
+        </ul>
     </aside>
 </section>
 
@@ -123,4 +172,253 @@
         <li class="fragment fade-in">The fields of a class can be made read-only or write-only.</li>
         <li class="fragment fade-in">A class can have total control over what is stored in its fields.</li>
     </ul>
+</section>
+
+<section>
+    <h2>Inheritance</h2>
+</section>
+
+<section>
+    <h2>Inheritance</h2>
+
+    <p>
+        <b>Super Class: </b>The class whose features are inherited is known as super class(or a base class or a parent
+        class).
+    </p>
+</section>
+
+<section>
+    <h2>Inheritance</h2>
+
+    <p>
+        <b>Sub Class: </b>The class that inherits the other class is known as sub class(or a derived class, extended
+        class, or child class).
+        The subclass can add its own fields and methods in addition to the superclass fields and methods.
+    </p>
+</section>
+<section>
+    <h2>Inheritance</h2>
+
+    <p>
+        <b>Reusability: </b>As the name specifies, reusability is a mechanism which facilitates you to reuse the fields
+        and methods of the existing class when you create a new class. You can use the same fields and methods already
+        defined in the previous class.
+    </p>
+</section>
+<section>
+    <h2>Inheritance</h2>
+
+    <p>
+        <b>Sub Class: </b>The class that inherits the other class is known as sub class(or a derived class, extended
+        class, or child class).
+        The subclass can add its own fields and methods in addition to the superclass fields and methods.
+    </p>
+</section>
+
+<section>
+    <h2>Inheritance</h2>
+
+    <h1>Reusability</h1>
+</section>
+
+<section>
+    <h2>Inheritance</h2>
+
+    <pre><code data-trim data-noescape="">
+        class Bicycle  
+        { 
+            // the Bicycle class has two fields 
+            public int gear; 
+            public int speed; 
+                
+            // the Bicycle class has one constructor 
+            public Bicycle(int gear, int speed) 
+            { 
+                this.gear = gear; 
+                this.speed = speed; 
+            } 
+                
+            // the Bicycle class has three methods 
+            public void applyBrake(int decrement) 
+            { 
+                speed -= decrement; 
+            } 
+                
+            public void speedUp(int increment) 
+            { 
+                speed += increment; 
+            } 
+            
+            // toString() method to print info of Bicycle 
+            public String toString()  
+            { 
+                return("No of gears are "+gear 
+                        +"\n"
+                        + "speed of bicycle is "+speed); 
+            }  
+        } 
+    </code></pre>
+</section>
+
+<section>
+    <h2>Inheritance</h2>
+
+    <pre><code data-trim data-noescape="">
+        class MountainBike extends Bicycle  
+        { 
+            
+            // the MountainBike subclass adds one more field 
+            public int seatHeight; 
+        
+            // the MountainBike subclass has one constructor 
+            public MountainBike(int gear,int speed, 
+                                int startHeight) 
+            { 
+                // invoking base-class(Bicycle) constructor 
+                super(gear, speed); 
+                seatHeight = startHeight; 
+            }  
+                
+            // the MountainBike subclass adds one more method 
+            public void setHeight(int newValue) 
+            { 
+                seatHeight = newValue; 
+            }  
+            
+            // overriding toString() method 
+            // of Bicycle to print more info 
+            @Override
+            public String toString() 
+            { 
+                return (super.toString()+ 
+                        "\nseat height is "+seatHeight); 
+            }    
+        } 
+    </code></pre>
+</section>
+
+<section>
+    <h2>Inheritance - Diamond problem</h2>
+
+    <pre><code data-trim data-noescape="">
+        public abstract class A {
+            public abstract void doSomething();
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Inheritance - Diamond problem</h2>
+
+    <pre><code data-trim data-noescape="">
+        public class B extends A {
+            public void doSomething() { ... }
+        }
+        
+        public class C extends A {
+            public void doSomething() { ... }
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Inheritance - Diamond problem</h2>
+
+    <pre><code data-trim data-noescape="">
+        public class D extends B, C { }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Inheritance - Diamond problem</h2>
+
+    <pre><code data-trim data-noescape="">
+        D d = new D();
+        // What should this do?
+        // Call doSomething from B or C?
+        d.doSomething();
+    </code></pre>
+</section>
+
+<section>
+    <h2>Inheritance - Diamond problem</h2>
+
+    <img src="img/diamond.png" alt="Diamond problem">
+</section>
+
+<section>
+    <h2>Runtime Polymorphism</h2>
+
+    <p>Polymorphism is the capability of a method to do different things based on the object that it is acting upon</p>
+</section>
+
+<section>
+    <h2>Compiletime Polymorphism</h2>
+
+    <p>Method overloading is a form of compile time polymorphism.</p>
+</section>
+
+<section>
+    <h2>Interfaces</h2>
+
+    <p>
+        An interface defines a collection of abstract methods. Classes can implement interfaces, thereby inheriting the
+        abstract methods of the interface.
+    </p>
+
+    <aside class="notes">
+        <ul>
+            <li>
+                Interfaces provides us a way for abstraction. If something implements the interface, you know that the
+                classes have implemented the methods in the interface.
+            </li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Interfaces</h2>
+
+    <img src="img/interfaces.png" alt="Abstraction via interfaces">
+
+    <aside class="notes">
+        <ul>
+            <li>We first define an interface which contains the methods we need</li>
+            <li>Next we can implement one or more classes that satisfy the interface</li>
+            <li>Since other classes will depend on the interface, we will achieve low coupling</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Interfaces</h2>
+
+    <pre><code data-trim data-noescape>
+        public interface CustomerRepository {
+            Customer find(int customerId);
+            void save(Customer customer);
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Interfaces</h2>
+
+    <pre><code data-trim data-noescape>
+        public class InMemoryCustomerRepository implements CustomerRepository {
+            public Customer find(int customerId) { ... }
+            public void save(Customer customer) { ... }
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2>Interfaces</h2>
+
+    <pre><code data-trim data-noescape>
+        public class PostgresCustomerRepository implements CustomerRepository {
+            public Customer find(int customerId) { ... }
+            public void save(Customer customer) { ... }
+        }
+    </code></pre>
 </section>

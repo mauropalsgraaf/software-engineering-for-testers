@@ -1,6 +1,6 @@
 <section>
     <h2>Module 2</h2>
-    <h3>Testing from a developers POV</h3>
+    <h3>Unit testing</h3>
 </section>
 
 <section>
@@ -133,7 +133,7 @@
         public class CalculatorTest {
             private Calculator calculator;
             
-            @BeforeEach
+            @Before
             public void setUp() {
                 this.calculator = new Calculator();
             }
@@ -284,7 +284,7 @@
             private JobService jobService;
             private UnemploymentServiceImpl unemploymentService;
 
-            @BeforeEach
+            @Before
             public void setUp() {
                 this.jobService = Mockito.mock(JobService.class);
                 this.unemploymentService = new UnemploymentServiceImpl(this.jobService);

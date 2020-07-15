@@ -296,10 +296,33 @@
 <section>
     <h2>Liskov Substitution Principle</h2>
 
-    <img src="img/breaking-liskov.png" alt="Liskov duck typing">
+    <ul>
+        <li>No new exceptions should be thrown in derived class.</li>
+        <li>Preconditions cannot be strengthened in a subtype.</li>
+        <li>Postconditions cannot be weakened in a subtype.</li>
+        <li>Invariants of the supertype must be preserved in a subtype.</li>
+        <li>Comply with the history constraint</li>
+    </ul>
 
     <aside class="notes">
-
+        <ul>
+            <li>
+                If your base class threw ArgumentNullException then your sub classes were only allowed to throw
+                exceptions of type ArgumentNullException or any exceptions derived from ArgumentNullException. Throwing
+                IndexOutOfRangeException is a violation of Liskov.
+            </li>
+            <li>Assume your base class works with a member int. Now your sub-type requires that int to be positive.</li>
+            <li>
+                Assume your base class required all connections to database should be closed before the method returned.
+                In your sub-class you overrode that method and leaved connection open for further reuse. You have
+                weakened the post-conditions of that method.
+            </li>
+            <li>If properties has certain constraints, these constraints need to hold in the subtype.</li>
+            <li>
+                The history constraint rules that an extending class must not expose methods that modify fields in an
+                object if the parent class does not expose such methods (for those fields).
+            </li>
+        </ul>
     </aside>
 </section>
 
@@ -338,6 +361,59 @@
             </li>
         </ul>
     </aside>
+</section>
+
+<section>
+    <h2>Liskov Substitution Principle</h2>
+
+    <p>The implementation of the derived classes may not be known for the code consumer</p>
+    <p>If you need to add some restriction in an overridden method and that restriction doesn't exist in baseline
+        implementation, you violate Liskov Substitution Principle.</p>
+</section>
+
+<section>
+    <h2>Liskov Substitution Principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim>
+        public interface CustomerRepository {
+            Optional<Customer> find(int customerId);
+            void save(Customer customer);
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Liskov Substitution Principle</h2>
+
+    <pre class="fragment fade-in"><code data-trim data-noescape>
+        public class PostgresCustomerRepository {
+            public Optional<Customer> find(int customerId) { ... }
+
+            public void save(Customer customer) {
+                if (this.find(customer.id).isPresent()) {
+                    throw new RuntimeException("customer already exists");
+                }
+
+                // save customer in database
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <p></p>
+    </aside>
+</section>
+
+<section>
+    <h2>
+        <p>Due to liskov substitution violations, the code that uses your type will have to have explicit knowledge of
+            the internal workings of derived types to treat them differently. This tightly couples code and just
+            generally makes the implementation harder to use consistently.</p>
+    </h2>
 </section>
 
 <section>

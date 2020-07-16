@@ -8,6 +8,7 @@
 
     <ul>
         <li class="fragment fade-in">Adapter</li>
+        <li class="fragment fade-in">Decorator</li>
         <li class="fragment fade-in">Factory</li>
     </ul>
 </section>
@@ -91,145 +92,6 @@
         Wizard wizard = new Wizard();
         doSomething(new WizardAdapter(wizard));
     </code></pre>
-</section>
-
-<section>
-    <h2>Factory pattern</h2>
-
-    <p class="fragment fade-in">
-        "Factory Method is a creational design pattern that provides an interface for creating objects in a superclass,
-        but allows subclasses to alter the type of objects that will be created." -
-        "https://refactoring.guru/design-patterns/factory-method"
-    </p>
-
-    <aside class="notes">
-        <ul>
-            <li></li>
-        </ul>
-    </aside>
-</section>
-
-<section>
-    <h2>Factory pattern</h2>
-
-    <pre><code data-trim data-noescape>
-        public interface Button {
-            void render();
-            void onClick();
-        }
-    </code></pre>
-
-    <aside class="notes">
-
-    </aside>
-</section>
-
-<section>
-    <h2>Factory pattern</h2>
-
-    <pre><code data-trim data-noescape>
-        public class WebButton implements Button {
-            public void render() {
-                System.out.println("I'm a web button");
-            }
-            public void onClick() {
-                System.out.println("You just clicked a web button");
-            }
-        }
-    </code></pre>
-
-    <aside class="notes">
-
-    </aside>
-</section>
-
-<section>
-    <h2>Factory pattern</h2>
-
-    <pre><code data-trim data-noescape>
-        public class WindowsButton implements Button {
-            public void render() {
-                System.out.println("I'm a windows button");
-            }
-            public void onClick() {
-                System.out.println("You just clicked a windows button");
-            }
-        }
-    </code></pre>
-
-    <aside class="notes">
-
-    </aside>
-</section>
-
-<section>
-    <h2>Factory pattern</h2>
-
-    <pre><code data-trim data-noescape>
-        public abstract class Dialog {
-            abstract Button createButton();
-        
-            void renderDialog() {
-                System.out.println("Rendering dialog");
-                System.out.println("Rendering button: ");
-                createButton().render();
-            }
-        }
-    </code></pre>
-
-    <aside class="notes">
-
-    </aside>
-</section>
-
-<section>
-    <h2>Factory pattern</h2>
-
-    <pre><code data-trim data-noescape>
-        public class WindowsDialog extends Dialog {
-            Button createButton() {
-                return new WindowsButton();
-            }
-        }
-    </code></pre>
-
-    <aside class="notes">
-
-    </aside>
-</section>
-
-<section>
-    <h2>Factory pattern</h2>
-
-    <pre><code data-trim data-noescape>
-        public class WebDialog extends Dialog {
-            Button createButton() {
-                return new WebButton();
-            }
-        }
-    </code></pre>
-
-    <aside class="notes">
-
-    </aside>
-</section>
-
-<section>
-    <h2>Factory pattern</h2>
-
-    <pre><code data-trim data-noescape>
-        public static void main(String[] args) {
-            Dialog dialog = new WebDialog();
-    
-            dialog.renderDialog();
-        }
-    </code></pre>
-
-    <aside class="notes">
-        <ul>
-            <li></li>
-        </ul>
-    </aside>
 </section>
 
 <section>
@@ -380,4 +242,144 @@
 
         String uncompressedDecryptedData = dataSource.readData();
     </code></pre>
+</section>
+
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <p class="fragment fade-in">
+        "Factory Method is a creational design pattern that provides an interface for creating objects in a superclass,
+        but allows subclasses to alter the type of objects that will be created." -
+        "https://refactoring.guru/design-patterns/factory-method"
+    </p>
+
+    <aside class="notes">
+        <ul>
+            <li></li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public interface Button {
+            void render();
+            void onClick();
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public class WebButton implements Button {
+            public void render() {
+                System.out.println("I'm a web button");
+            }
+            public void onClick() {
+                System.out.println("You just clicked a web button");
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public class WindowsButton implements Button {
+            public void render() {
+                System.out.println("I'm a windows button");
+            }
+            public void onClick() {
+                System.out.println("You just clicked a windows button");
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public abstract class Dialog {
+            abstract Button createButton();
+        
+            void renderDialog() {
+                System.out.println("Rendering dialog");
+                System.out.println("Rendering button: ");
+                createButton().render();
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public class WindowsDialog extends Dialog {
+            Button createButton() {
+                return new WindowsButton();
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public class WebDialog extends Dialog {
+            Button createButton() {
+                return new WebButton();
+            }
+        }
+    </code></pre>
+
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h2>Factory pattern</h2>
+
+    <pre><code data-trim data-noescape>
+        public static void main(String[] args) {
+            Dialog dialog = new WebDialog();
+    
+            dialog.renderDialog();
+        }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li></li>
+        </ul>
+    </aside>
 </section>

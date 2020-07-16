@@ -86,11 +86,6 @@
 </section>
 
 <section>
-    <h4>One word per concept</h4>
-    <p>TODO add UML image where naming per concept is highlighted</p>
-</section>
-
-<section>
     <h4>Don't be cute</h4>
     <p>Funny names remain understandable only as long as you and the people who share the joke stay on the project.</p>
 </section>
@@ -145,6 +140,43 @@
         If your function has to many arguments, they most
         like are connected and should be wrapped in an object
     </p>
+
+    <aside class="notes">
+        <ul>
+            <li>It also will tell the relation between arguments.</li>
+            <li>It also will tell the relation between objects.</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Not to many arguments</h2>
+
+    <pre><code data-trim data-noescape>
+        public void save(String name, String age, String jobTitle) { ... }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>It also will tell the relation between arguments.</li>
+            <li>It also will tell the relation between objects.</li>
+        </ul>
+    </aside>
+</section>
+
+<section>
+    <h2>Not to many arguments</h2>
+
+    <pre><code data-trim data-noescape>
+        public void save(Employee employee) { ... }
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>It also will tell the relation between arguments.</li>
+            <li>It also will tell the relation between objects.</li>
+        </ul>
+    </aside>
 </section>
 
 <section>
@@ -177,7 +209,7 @@
 
     <pre class="fragment fade-in"><code data-trim data-noescape>
         // Check to see if the employee is eligible for full benefits
-        if ((employee.flags & HOURLY_FLAG) && (employee.age > 65))
+        if ((employee.flags == HOURLY_FLAG) && (employee.age > 65))
     </code></pre>
 
     <pre class="fragment fade-in"><code data-trim data-noescape>
@@ -257,52 +289,6 @@
         </ul>
     </aside>
 
-</section>
-
-<!-- <section>
-    <h1>Objects and Data Structures</h1>
-
-    <aside class="notes">
-
-    </aside>
-</section> -->
-<!-- 
-<section>
-    <h2>The law of demeter</h2>
-
-    <aside class="notes">
-        // TODO
-    </aside>
-</section> -->
-
-<section>
-    <h2>Data Transfer Objects (DTO)</h2>
-
-    <aside class="notes">
-        // TODO
-    </aside>
-</section>
-
-<section>
-    <h2>Active records</h2>
-
-    <aside class="notes">
-        // TODO
-    </aside>
-</section>
-
-<section>
-    <h2>Use unchecked exceptions</h2>
-
-    <aside class="notes">
-        <ul>
-            <li>Checked exceptions break the open/closed principle.</li>
-            <li>If you have an exception that is thrown three layers lower, all the layers need to explicitly declare
-                the exception</li>
-            <li>Checked exceptions can be useful when writing a critical library because you MUST handle then</li>
-            <li>When doing application development, the cost outweigh the benefits</li>
-        </ul>
-    </aside>
 </section>
 
 <section>

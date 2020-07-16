@@ -409,11 +409,13 @@
 </section>
 
 <section>
-    <h2>
-        <p>Due to liskov substitution violations, the code that uses your type will have to have explicit knowledge of
-            the internal workings of derived types to treat them differently. This tightly couples code and just
-            generally makes the implementation harder to use consistently.</p>
-    </h2>
+    <h2>Liskov Substitution Principle</h2>
+
+    <p>
+        Due to liskov substitution violations, the code that uses your type will have to have explicit knowledge of
+        the internal workings of derived types to treat them differently. This tightly couples code and just
+        generally makes the implementation harder to use consistently.
+    </p>
 </section>
 
 <section>
@@ -493,7 +495,10 @@
     </code></pre>
 
     <aside class="notes">
-
+        <ul>
+            <li>Clients will only have to know about the methods that are of interest to them.</li>
+            <li>ISP is intended to keep a system decoupled and thus easier to refactor, change, and redeploy. </li>
+        </ul>
     </aside>
 </section>
 

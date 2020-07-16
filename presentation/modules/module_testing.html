@@ -303,11 +303,11 @@
 <section>
     <h2>Mocking</h2>
 
-    <pre><code data-line-numbers="1-13|8-8|9-9|10-10" data-trim data-noescape>
+    <pre><code data-line-numbers="1-13|8-8|9-9|10-10|14-14" data-trim data-noescape>
         public class UnemploymentServiceImplTest {
 
             @Test
-            public void givenReturnIsOfTypeOptional_whenMocked_thenValueIsEmpty() {
+            public void testIsEntitledIfPersonHasJobPosition() {
 
                 Person person = new Person();
             
@@ -316,6 +316,8 @@
                 ).thenReturn(Optional.empty());
                 
                 assertTrue(unemploymentService.personIsEntitledToUnemploymentSupport(person));
+
+                verify(customerRepository, times(1)).getCustomer(1);
             }
         }
     </code></pre>

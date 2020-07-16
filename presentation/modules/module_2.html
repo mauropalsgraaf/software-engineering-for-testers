@@ -288,20 +288,6 @@
             <li>These comments do add nothing, only noise</li>
         </ul>
     </aside>
-
-</section>
-
-<section>
-    <h2>Create context with exceptions</h2>
-
-    <aside class="notes">
-        <ul>
-            <li>The exception should provide enough context to determine the source and location of an error</li>
-            <li>It should explain the intent of why the operation failed</li>
-            <li>Add informative error messages with the exceptions. It allows you to improve logging and gives the
-                developer more info of why something failed.</li>
-        </ul>
-    </aside>
 </section>
 
 <section>
@@ -332,7 +318,7 @@
 </section>
 
 <section>
-    <h2></h2>
+    <h2>Don't return null</h2>
 
     <pre class="fragment fade-in"><code data-trim data-noescape>
         List<Employee> employees = getEmployees();
@@ -364,7 +350,7 @@
 <section>
     <h2>Use optional as typesafe null alternative</h2>
 
-    <pre class="fragment fade-in"><code data-trim data-noescape>
+    <pre class="fragment fade-in"><code data-trim>
         public void registerItem(Item item) {
             Optional<ItemRegistry> optionalRegistry = peristentStore.getItemRegistry();
             optionalRegistry
